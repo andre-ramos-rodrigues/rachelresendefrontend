@@ -18,7 +18,7 @@ export const screen = (props) => {
 
 export const micro = (props) => {
   return css`
-    @media only screen and (max-width: 530px) {
+    @media only screen and (max-width: 645px) {
       ${props}
     }
   `;

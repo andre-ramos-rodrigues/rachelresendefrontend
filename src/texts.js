@@ -1,0 +1,15 @@
+export const homeTitlePT = 'Olá, eu sou a Rachel!'
+
+export const homeTitleEN = "Hi, I'm Rachel!"
+
+export const homeTextPT = 'Além de me formar em Publicidade pelo IBMR, possuo especialização em Gestão de Marketing pelo IBMEC e tenho conhecimento e habilidades analíticas, tais como SQL e Python. Sou apaixonada por tecnologia e por tudo que é novo. Trabalho ensinando cultura da inovação e analítica no Hurb, como Data Ambassador e no tempo livre faço parte da WTM do Rio de Janeiro, comunidade voluntária, promovida pelo Google que incentiva mais mulheres na tecnologia. Tenho experiência principalmente com performance de operação comercial digital, foram mais 5 anos apenas trabalhando nesse setor, ao todo tenho mais de 7 anos em Marketing, passando por empresas como Globosat, Globo, Cyberlabs e Stone. Caso queira tomar um café ou esteja precisando de um planejamento de comunicação para seu produto ou negócio, entre em contato.'
+
+export const homeTextEN = 'Além de me formar em Publicidade pelo IBMR, possuo especialização em Gestão de Marketing pelo IBMEC e tenho conhecimento e habilidades analíticas, tais como SQL e Python. Sou apaixonada por tecnologia e por tudo que é novo. Trabalho ensinando cultura da inovação e analítica no Hurb, como Data Ambassador e no tempo livre faço parte da WTM do Rio de Janeiro, comunidade voluntária, promovida pelo Google que incentiva mais mulheres na tecnologia. Tenho experiência principalmente com performance de operação comercial digital, foram mais 5 anos apenas trabalhando nesse setor, ao todo tenho mais de 7 anos em Marketing, passando por empresas como Globosat, Globo, Cyberlabs e Stone. Caso queira tomar um café ou esteja precisando de um planejamento de comunicação para seu produto ou negócio, entre em contato.'
+
+export const mentoringTitlePT = 'Bem-vindos à mentoria.'
+
+export const mentoringTitleEN = 'Welcome to the mentory.'
+
+export const mentoringTextPT = 'Se tiver interesse em receber orientações para crescimento de vendas e amadurecimento de negócio, realizo mentorias aos sábados, de 50 minutos por sessão, sendo 4 sessões por mês e como resultado um plano de ação para melhorar o desempenho da sua marca e/ou das suas vendas, vai depender da sua necessidade. A contratação é mensal, no valor de R$900 reais. Caso precise de desenvolvimento web, como sites e aplicações, tenho um time para somar e contribuir com o projeto, podendo ter alteração de valor.'
+
+export const mentoringTextEN = 'Se tiver interesse em receber orientações para crescimento de vendas e amadurecimento de negócio, realizo mentorias aos sábados, de 50 minutos por sessão, sendo 4 sessões por mês e como resultado um plano de ação para melhorar o desempenho da sua marca e/ou das suas vendas, vai depender da sua necessidade. A contratação é mensal, no valor de R$900 reais. Caso precise de desenvolvimento web, como sites e aplicações, tenho um time para somar e contribuir com o projeto, podendo ter alteração de valor.'

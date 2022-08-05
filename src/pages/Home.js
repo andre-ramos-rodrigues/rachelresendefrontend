@@ -1,6 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
 import { screen, mobile, micro } from '../responsive'
+import { useSelector, useDispatch } from 'react-redux'
+import {getHomeInfo, updateHomeInfo, getENHomeInfo, updateENHomeInfo} from '../redux/apiCalls'
+//import {saveInfo} from '../redux/saveInfo'
+import {homeTitlePT, homeTitleEN, homeTextPT, homeTextEN} from '../texts'
+import axios from 'axios'
 
 const Container = styled.div`
   height: 100%;
@@ -19,7 +24,6 @@ const Container = styled.div`
 }
 `
 const InfoContainer = styled.div`
-  display: flex;
   height: 100%;
   display: flex;
   //width: 100%;
@@ -54,16 +58,91 @@ const Ball = styled.div`
   ${mobile({ width: "80px", height:"80px", top: '-10px', left: '-15px' })};
   ${micro({ display: 'none' })};
 `
+const InputTitle = styled.input`
+  margin-bottom: 20px;
+  height: 40px;
+  width: 300px;
+  border-radius: 5px;
+  border: none;
+  ${micro({ width: '40%' })};
+  &::placeholder {
+       padding: 5px;
+   }
+`
+const InputText = styled.textarea`
+  height: 240px;
+  width: 300px;
+  border-radius: 5px;
+  border: none;
+  ${micro({ width: '40%', height: '120px' })};
+  &::placeholder {
+       padding: 5px;
+   }
+`
 
 const Home = () => {
+  const dispatch = useDispatch()
+  const {getHomeContent} = useSelector((state) => state.getHome)
+  const {getENHomeContent} = useSelector((state) => state.getENHome)
+  const [homeTitle, setHomeTitle] = React.useState('')
+  const [homeText, setHomeText] = React.useState('')
+  const [ENhomeTitle, setENHomeTitle] = React.useState('')
+  const [ENhomeText, setENHomeText] = React.useState('')
+  const edit = useSelector((state) => state.editMode.edit)
+  const user = useSelector((state) => state.user.userInfo)
+  const english = useSelector((state) => state.englishMode.englishOn)
+
+  const handleSave = async(e) => {
+    e.preventDefault()
+    //saveInfo(homeTitle, homeText, getHomeContent, dispatch)
+    const updated = await updateHomeInfo(homeTitle, homeText, dispatch)
+    const updatedEN = await updateENHomeInfo(ENhomeTitle, ENhomeText, dispatch)
+  }
+
+  React.useEffect(() => {
+    getHomeInfo(dispatch)
+    getENHomeInfo(dispatch)
+    console.log('recebendo infos da api')
+    setHomeText(getHomeContent.text)
+    setHomeTitle(getHomeContent.title)
+    setENHomeText(getENHomeContent.text)
+    setENHomeTitle(getENHomeContent.title)
+  }, [dispatch, getENHomeContent.text, getENHomeContent.title, getHomeContent])
+
   return (
     <Container>
-        <InfoContainer>
+      <InfoContainer>
+      {
+        edit === true ? 
+        (
+          <>
+          <Info style={{display: 'flex', flexDirection:'column'}}>
+            <InputTitle type='text' placeholder='Título' autoFocus 
+            value={english ? ENhomeTitle : homeTitle} 
+            onChange={english? e => setENHomeTitle(e.target.value) : e => setHomeTitle(e.target.value)}/>
+            <InputText type='formfield' placeholder='Texto' 
+            value={english? ENhomeText : homeText} 
+            onChange={english? e => setENHomeText(e.target.value) : e => setHomeText(e.target.value)}/>
+          </Info>
+          <button onClick={handleSave} style={{height: '40px', borderRadius: '15px', 
+          border: 'none', alignSelf: 'center', background: 'tomato', width: '60px'}}>Salvar</button>
+          <Ball />
+          </>
+        ) : (
+          <>
           <Info>
-          <h2 style={{fontWeight: '400', marginBottom: '15px'}}>Olá, eu sou a Rachel!</h2> 
-          Além de me formar em Publicidade pelo IBMR, possuo especialização em Gestão de Marketing pelo IBMEC e tenho conhecimento e habilidades analíticas, tais como SQL e Python.  Sou apaixonada por tecnologia e por tudo que é novo. <br/> Trabalho ensinando cultura da inovação e analítica no Hurb, como Data Ambassador e no tempo livre faço parte da WTM do Rio de Janeiro, comunidade voluntária, promovida pelo Google que incentiva mais mulheres na tecnologia. <br/> Tenho experiência principalmente com performance de operação comercial digital, foram mais 5 anos apenas trabalhando nesse setor, ao todo tenho mais de 7 anos em Marketing, passando por empresas como Globosat, Globo, Cyberlabs e Stone. <br/> Caso queira tomar um café ou esteja precisando de um planejamento de comunicação para seu produto ou negócio, entre em contato. 
+          {
+            <h2 style={{fontWeight: '400', marginBottom: '15px'}}>{english ? ENhomeTitle : homeTitle}</h2> 
+          }
+          {
+            <p>{english? ENhomeText : homeText}</p>     
+          }
+          
           </Info>
           <Ball />
+          </>
+        )
+      }
         </InfoContainer>
     </Container>
   )

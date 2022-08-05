@@ -3,6 +3,8 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { mobile, screen, micro } from "./responsive";
 import MenuIcon from '@mui/icons-material/Menu';
+import { useSelector, useDispatch } from 'react-redux'
+import { turnOn, turnOff } from './redux/EnglishModeSlice'
 
 const Container = styled.div`
   background-color: rgb(236, 229, 229);
@@ -71,17 +73,21 @@ const ToggleMenuButton = styled.div`
   }
   ${micro({ display: 'flex' })};
 `
+const English = styled.div`
+  display: none;
+  ${micro({ display: 'flex' })}
+`
 const Menu = styled.div`
   background: rgb(232, 53, 85);
   min-width: 200px;
-  width: 40%;
+  width: 100%;
   position: absolute;
   z-index: 5000;
   top: 12%;
-  right: 15%;
+  left: 0%;
   display: flex;
   flex-direction: column;
-  border-radius: 5px;
+  border-radius: 15px;
 
   opacity: 0;
   transform: translateY(-5px);
@@ -111,25 +117,50 @@ const MenuOption = styled.button`
     background: rgb(232, 80, 85);
   }
 `
+const Button = styled.button`
+  margin: 0 15px;
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  border: none;
+  align-self: center;
+  opacity: 1;
+  transition: background-color 0.3s;
+
+  &:hover{
+    cursor: pointer;
+    color: tomato;
+  }
+`
 
 
 const Header = () => {
   const [toggle, setToggle] = React.useState(false)
+  const user = useSelector((state) => state.user.userInfo)
+  const english = useSelector((state) => state.englishMode.englishOn)
+  const dispatch = useDispatch()
+
+  const handleLan = () => {
+    setToggle(false)
+    if (english){
+      dispatch(turnOff())
+    } else {
+      dispatch(turnOn())
+    }
+  }
 
   React.useEffect(() => {
     function handleResize() {
       if(window.innerWidth > 550) {
         setToggle(false)
       }
-}
-
+}    
     window.addEventListener('resize', handleResize)
-  })
+  }, [])
 
   const handleClick = () => {
     setToggle(!toggle)
     console.log('mostrando')
-
   }
   return (
     <Container>
@@ -144,11 +175,21 @@ const Header = () => {
           <MenuOption onClick={() => setToggle(false)}>Resume</MenuOption>
           </Link>
           <Link to='/Mentoring'>
-          <MenuOption onClick={() => setToggle(false)}>Mentoring</MenuOption>
+          <MenuOption onClick={() => setToggle(false)}>Services</MenuOption>
           </Link>
           <Link to='/Contact'>
           <MenuOption onClick={() => setToggle(false)}>Contact</MenuOption>
           </Link>
+          <MenuOption onClick={handleLan}>{english ? 'PT' : 'EN'}</MenuOption>
+          {
+            user.username.length > 0 && (
+              <Link to='/login'>
+              <MenuOption onClick={() => setToggle(false)}>Logout</MenuOption>
+              </Link>
+            )
+          
+          }
+          
         </Menu> 
 
       }
@@ -184,6 +225,18 @@ const Header = () => {
         Contact
         </NavItem>
         </Link>
+        {
+          english ? <Button onClick={() => dispatch(turnOff())}>PT</Button> : <Button onClick={() => dispatch(turnOn())}>EN</Button>
+        }
+        {
+           user.username.length > 0 && (
+            <Link to='/login'>
+          <NavItem style={{background: 'teal'}}>
+          {user.username}
+          </NavItem>
+        </Link>
+          )
+        }
       </Navbar>
       </Right>
       
