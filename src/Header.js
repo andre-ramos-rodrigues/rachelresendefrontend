@@ -83,7 +83,7 @@ const Menu = styled.div`
   width: 100%;
   position: absolute;
   z-index: 5000;
-  top: 12%;
+  top: 14%;
   left: 0%;
   display: flex;
   flex-direction: column;
@@ -179,6 +179,9 @@ const Header = () => {
           </Link>
           <Link to='/Contact'>
           <MenuOption onClick={() => setToggle(false)}>Contact</MenuOption>
+          </Link>
+          <Link to='/login'>
+          <MenuOption onClick={() => setToggle(false)}>Admin</MenuOption>
           </Link>
           <MenuOption onClick={handleLan}>{english ? 'PT' : 'EN'}</MenuOption>
           {
