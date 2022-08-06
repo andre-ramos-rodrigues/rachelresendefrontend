@@ -61,7 +61,7 @@ const Ball = styled.div`
 const InputTitle = styled.input`
   margin-bottom: 20px;
   height: 40px;
-  width: 300px;
+  min-width: 300px;
   border-radius: 5px;
   border: none;
   ${micro({ width: '40%' })};
@@ -71,7 +71,7 @@ const InputTitle = styled.input`
 `
 const InputText = styled.textarea`
   height: 240px;
-  width: 300px;
+  min-width: 300px;
   border-radius: 5px;
   border: none;
   ${micro({ width: '40%', height: '120px' })};

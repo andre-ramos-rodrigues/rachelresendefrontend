@@ -228,6 +228,11 @@ const Header = () => {
         Contact
         </NavItem>
         </Link>
+        <Link to='/login'>
+        <NavItem>
+        Admin
+        </NavItem>
+        </Link>
         {
           english ? <Button onClick={() => dispatch(turnOff())}>PT</Button> : <Button onClick={() => dispatch(turnOn())}>EN</Button>
         }
